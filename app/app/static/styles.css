@@ -1,0 +1,21 @@
+.navigation {
+    display: flex;
+    flex-direction: row;
+    background-color: aqua;
+}
+
+.navbar-option {
+    padding: 10px;
+}
+
+.alert-success {
+    color: green;
+}
+
+.alert-info {
+    color: blue;
+}
+
+.alert-error {
+    color: red;
+}
