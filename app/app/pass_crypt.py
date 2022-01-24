@@ -22,7 +22,9 @@ def decrypt(key, ciphertext, iv):
     return plaintext
 
 def xor(a, b):
-    return bytes(p^q for p, q in zip(a, b))
+    tmp_list = [p^q for p, q in zip(a, b)]
+    return bytes(tmp_list)
+
 
 def prepare_password(password):
     while len(password) < 32:

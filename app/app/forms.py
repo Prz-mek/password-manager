@@ -3,6 +3,7 @@ from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, EqualTo, ValidationError
 from app.db_models import User
 import re
+from time import sleep
 
 class RegistarionFrom(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=3, max=32)])
@@ -23,11 +24,17 @@ class RegistarionFrom(FlaskForm):
         if not re.search(r"[ !@#$%&'()*+,-./[\\\]^_`{|}~"+r']', field.data):
             raise ValidationError("Password is too weak: no symbol")
 
+    def validate_submit(form,field):
+        sleep(0.5)
+
     
 class LoginFrom(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=3, max=32)])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Sign In')
+
+    def validate_submit(form,field):
+        sleep(0.5)
 
 class NewPasswordForm(FlaskForm):
     site_name = StringField('SiteName', validators=[DataRequired(), Length(max=200)])

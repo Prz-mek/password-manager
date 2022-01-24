@@ -6,6 +6,7 @@ from app.db_models import User, SavedPassword, SecretPart
 from flask_login import login_user, current_user, logout_user, login_required
 from app.pass_crypt import encrypt, decrypt, prepare_password, break_secret, bind_secret
 
+
 def login_response(name, value, location, max_age=None):
     response = make_response('', 303)
     response.headers['Location'] = location
@@ -57,7 +58,6 @@ def login():
 
             password = prepare_password(form.password.data)
             l1, l2 = break_secret(password)
-            print(l1, l2)
             part = SecretPart(secret=l1, user=current_user)
             db.session.add(part)
             db.session.commit()
@@ -65,7 +65,6 @@ def login():
             next_page = next_page if next_page else url_for('home')
             response = login_response('hello', l2, next_page)
             return response
-            # return redirect(next_page)
         else:
             flash('Check login or password', 'error')
     return render_template('login.html', title='Login', form=form)
@@ -75,11 +74,11 @@ def login():
 def logout():
     user=current_user
     part = SecretPart.query.filter_by(user=user).first()
-    db.session.delete(part)
-    db.session.commit()
+    if part:
+        db.session.delete(part)
+        db.session.commit()
     logout_user()
     return logout_response('hello', url_for('home'))
-    # return redirect(url_for('home'))
 
 
 @app.route('/savedpasswords')
