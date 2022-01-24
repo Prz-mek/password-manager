@@ -16,6 +16,7 @@ def encrypt(key, plaintext):
 def decrypt(key, ciphertext, iv):
     iv = b64decode(iv)
     ct = b64decode(ciphertext)
+    p
     cipher = AES.new(key, AES.MODE_CBC, iv)
     plaintext = unpad(cipher.decrypt(ct), AES.block_size)
     return plaintext
