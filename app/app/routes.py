@@ -94,11 +94,7 @@ def get_password(password_id):
     if l2 is None:
          return redirect(url_for('logout'))
     l1 = SecretPart.query.filter_by(user=current_user).first().secret
-    print(l1)
-    print(type(l1))
-    print(SecretPart.query.filter_by(user=current_user).all())
     key = bind_secret(l1, l2)
-    print(l1, l2)
     crypt_password = SavedPassword.query.filter_by(id=password_id, user=current_user).first()
     if crypt_password is None:
         flash('You have no access.', 'error')
@@ -115,14 +111,9 @@ def new_password():
         if l2 is None:
             return redirect(url_for('logout'))
         l1 = SecretPart.query.filter_by(user=current_user).first().secret
-        print(l1)
-        print(l2)
-        print(SecretPart.query.filter_by(user=current_user).all())
         if l1 is None:
             return redirect(url_for('logout'))
         key = bind_secret(l1, l2) # .decode('utf-8')
-        print(key)
-        print(len(key))
         password, iv = encrypt(key, form.password.data.encode('utf-8'))
         password_to_save = SavedPassword(site_name=form.site_name.data, password=password, iv=iv, user=current_user)
         db.session.add(password_to_save)
