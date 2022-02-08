@@ -1,5 +1,5 @@
 # password-manager
-It's not completely safe password manager.
+It's **not** completely safe password manager.
 
 ## features
 * hashing master password
