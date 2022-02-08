@@ -1,9 +1,13 @@
 # password-manager
 It's not completely safe password manager.
 
-## fearures
+## features
 * hashing master password
 * encrypting and decrypting passwords to external services
+* master password strength validation
+* sign in delay
+
+
 (in progress)
 
 ## running
@@ -15,7 +19,7 @@ docker-compose-up
 
 or use flask server.
 
-## TODO
+## todo
 * removing passwords from database.
 * input data analyze
-* login couter
+* login attempts counter
